@@ -1,0 +1,61 @@
+{
+  "stores": [
+    {
+      "id": "1201",
+      "name": "Atlanta North Builder's Supply",
+      "address": "1201 Peachtree St, Atlanta, GA",
+      "lat": 33.7845,
+      "lng": -84.3837
+    },
+    {
+      "id": "0944",
+      "name": "Marietta Regional Center",
+      "address": "944 Cobb Pkwy, Marietta, GA",
+      "lat": 33.9526,
+      "lng": -84.5499
+    }
+  ],
+  "signals": {
+    "1201": [
+      {
+        "type": "Seasonal",
+        "metric": "NDVI rising (0.2 -> 0.4)",
+        "market_signal": "Grass is exiting dormancy",
+        "stocking_action": "Heavy: Fertilizer, Seed, Pre-emergent",
+        "intensity": "High"
+      },
+      {
+        "type": "Growth",
+        "metric": "45-acre soil disturbance",
+        "market_signal": "New subdivision phase",
+        "stocking_action": "Increase Fencing inventory (200 units).",
+        "intensity": "Medium",
+        "geo_points": [
+          {"lat": 33.7915, "lng": -84.3737},
+          {"lat": 33.7935, "lng": -84.3777},
+          {"lat": 33.7905, "lng": -84.3807}
+        ]
+      }
+    ],
+    "0944": [
+      {
+        "type": "Machinery",
+        "metric": "1st Mow Window in 10 days",
+        "market_signal": "High intent for upgrades",
+        "stocking_action": "Display: Push & Riding Mowers",
+        "intensity": "Medium"
+      },
+      {
+        "type": "Growth",
+        "metric": "New rooftops detected",
+        "market_signal": "Move-in phase for new builds",
+        "stocking_action": "Assign 1 'Pro-Desk' rep to specific zip code 30301.",
+        "intensity": "Extreme",
+         "geo_points": [
+          {"lat": 33.9626, "lng": -84.5399},
+          {"lat": 33.9726, "lng": -84.5299}
+        ]
+      }
+    ]
+  }
+}

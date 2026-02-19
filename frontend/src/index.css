@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-[#0A0C10] text-[#E0E6ED] font-sans antialiased m-0 p-0;
+  }
+}
+
+@media print {
+  @page {
+    size: landscape;
+    margin: 0;
+  }
+
+  body {
+    background: #0A0C10 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide the navbar and unnecessary UI during print */
+  header button,
+  header .animate-pulse {
+    display: none !important;
+  }
+
+  main {
+    height: 100vh !important;
+    padding: 24px !important;
+  }
+}

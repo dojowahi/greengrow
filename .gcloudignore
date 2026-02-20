@@ -1,0 +1,12 @@
+.gcloudignore
+.git
+.gitignore
+node_modules
+frontend/node_modules
+backend/.venv
+backend/__pycache__
+frontend/dist
+backend/static
+*.pyc
+*.pyo
+.DS_Store

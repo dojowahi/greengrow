@@ -7,17 +7,17 @@ RUN npm install
 COPY frontend/ ./
 RUN npm run build
 
-FROM python:3.11-slim
+FROM python:3.12-slim
 WORKDIR /app
 
 # Install uv
-RUN pip install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-# Copy uv dependency files
-COPY backend/pyproject.toml ./
+# Copy dependency files
+COPY backend/pyproject.toml backend/uv.lock ./
 
-# Install dependencies into system Python for Docker
-RUN uv pip install --system fastapi uvicorn pydantic python-dotenv sqlmodel pandas earthengine-api
+# Install dependencies into system Python
+RUN uv pip install --system -r pyproject.toml
 
 # Copy backend source
 COPY backend/src ./src

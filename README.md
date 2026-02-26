@@ -7,6 +7,15 @@ GreenGrow is a full-stack web application with a React frontend (Vite + Tailwind
 - **Backend**: FastAPI, Pydantic, Python 3.12, with integrations for Google GenAI and Data Commons.
 - **Deployment**: Configured for Google Cloud Run using Docker.
 
+## Capabilities
+GreenGrow is designed as a Retail Intelligence platform leveraging geospatial and AI data. Its core capabilities include:
+- **Vegetation & Seasonal Analysis**: Connects to Google Earth Engine (Sentinel-2) to analyze NDVI (Normalized Difference Vegetation Index) and detect seasonal transitions around retail locations.
+- **Growth & Construction Detection**: Uses Dynamic World and Earth Engine to identify new construction and land disturbance areas near stores.
+- **Historical Reporting**: Provides 6-month historical trends of vegetation and building activity to understand local market changes.
+- **Location Context**: Integrates with Google Data Commons for demographic data and provides localized weather forecasting.
+- **AI-Powered Stocking Actions**: Utilizes Google GenAI (Gemini) to generate context-aware, actionable retail stocking recommendations based on geospatial signals, weather, and local context.
+
+
 ## Getting Started
 
 ### Prerequisites

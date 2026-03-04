@@ -5,7 +5,7 @@ import { TableView } from './components/Table';
 import { PlaceSearch } from './components/PlaceSearch';
 import { analyzeSeasonal, analyzeGrowth, analyzeHistory, fetchLocationContext } from './utils/api';
 import type { Store, SignalResponse, LocationContext, Signal } from './utils/api';
-import { Layers, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 
 function App() {
   const [stores, setStores] = useState<Store[]>([]);
@@ -137,16 +137,22 @@ function App() {
 
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ''} libraries={['places']}>
-      <div className="min-h-screen bg-[#0A0C10] text-[#E0E6ED] flex flex-col font-sans">
+      <div className="min-h-screen bg-google-gray-50 text-google-gray-900 flex flex-col font-sans">
         {/* Top Navbar */}
-        <header className="bg-[#12151C] border-b border-gray-800 p-4 sticky top-0 z-50 flex justify-between items-center shadow-md">
+        <header className="bg-white border-b border-gray-200 p-4 sticky top-0 z-50 flex justify-between items-center shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#4ade80] to-[#0ea5e9] rounded-xl flex items-center justify-center shadow-lg">
-              <Layers className="text-white w-5 h-5" />
+            <div className="flex shrink-0 items-center justify-center">
+              {/* Google Colors Logo representation */}
+              <div className="flex gap-1">
+                <div className="w-3 h-6 bg-google-blue rounded-full"></div>
+                <div className="w-3 h-6 bg-google-red rounded-full"></div>
+                <div className="w-3 h-6 bg-google-yellow rounded-full"></div>
+                <div className="w-3 h-6 bg-google-green rounded-full"></div>
+              </div>
             </div>
             <div>
-              <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#4ade80] to-[#0ea5e9] tracking-tight">GreenGrowth</h1>
-              <p className="text-xs text-gray-500 font-medium tracking-wide">RETAIL INTELLIGENCE PLATFORM</p>
+              <h1 className="text-xl font-medium text-google-gray-900 tracking-tight">GreenGrowth</h1>
+              <p className="text-xs text-google-gray-800 font-medium tracking-wide">RETAIL INTELLIGENCE PLATFORM</p>
             </div>
           </div>
 
@@ -156,14 +162,14 @@ function App() {
           </div>
 
           <div className="flex items-center gap-4 text-sm">
-            <span className="flex items-center gap-2 px-3 py-1.5 bg-gray-800/50 rounded-full border border-gray-700/50">
-              <span className="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse"></span>
+            <span className="flex items-center gap-2 px-3 py-1.5 bg-google-green/10 text-google-green rounded-full border border-google-green/20 font-medium tracking-wide">
+              <span className="w-2 h-2 rounded-full bg-google-green"></span>
               System Active
             </span>
             {selectedStore && (
               <button
                 onClick={() => handleSelectStore(null)}
-                className="px-4 py-2 flex items-center gap-2 border border-[#0ea5e9]/50 text-[#0ea5e9] hover:bg-[#0ea5e9]/10 transition-colors rounded-lg font-medium"
+                className="px-4 py-2 flex items-center gap-2 border border-google-gray-200 text-google-gray-800 hover:bg-google-gray-50 transition-colors rounded-full font-medium"
               >
                 <RefreshCw className="w-4 h-4" />
                 Reset Map
@@ -171,7 +177,7 @@ function App() {
             )}
             <button
               onClick={handleExport}
-              className="px-4 py-2 bg-white text-black hover:bg-gray-200 transition-colors rounded-lg font-medium shadow-md shadow-white/5"
+              className="px-4 py-2 bg-google-blue text-white hover:bg-blue-600 transition-colors rounded-full font-medium shadow-sm shadow-google-blue/20"
             >
               Export Report
             </button>

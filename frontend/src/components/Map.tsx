@@ -30,7 +30,7 @@ export const MapView: React.FC<MapViewProps> = ({ stores, signals, selectedStore
   // Using a blank/demo key for this prototype.
   // Note: APIProvider is now in App.tsx to share context with PlaceSearch
   return (
-    <div className="w-full h-full relative rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+    <div className="w-full h-full relative rounded-xl overflow-hidden shadow-sm border border-google-gray-200">
       <Map
         center={center}
         zoom={zoom}
@@ -38,18 +38,8 @@ export const MapView: React.FC<MapViewProps> = ({ stores, signals, selectedStore
           setCenter(ev.detail.center);
           setZoom(ev.detail.zoom);
         }}
-        // use dark mode map
-        mapId="map-dark"
-        styles={[
-          { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
-          { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
-          { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
-          {
-            featureType: "water",
-            elementType: "geometry",
-            stylers: [{ color: "#17263c" }],
-          },
-        ]}
+        // use default light mode map
+        mapId="map-light"
       >
         {stores.map((store) => (
           <AdvancedMarker
@@ -57,7 +47,7 @@ export const MapView: React.FC<MapViewProps> = ({ stores, signals, selectedStore
             position={{ lat: store.lat, lng: store.lng }}
             onClick={() => onSelectStore(store)}
           >
-            <Pin background={selectedStore?.id === store.id ? '#FF5733' : '#4ade80'} borderColor={'#000'} glyphColor={'#fff'} />
+            <Pin background={selectedStore?.id === store.id ? '#EA4335' : '#34A853'} borderColor={'#ffffff'} glyphColor={'#fff'} />
           </AdvancedMarker>
         ))}
 
@@ -75,11 +65,11 @@ export const MapView: React.FC<MapViewProps> = ({ stores, signals, selectedStore
             return <MapTileLayer key={`tile-${idx}`} urlFormat={signal.tile_url} />;
           }
           if (signal.geo_points && signal.geo_points.length > 0) {
-            const colorClass = signal.type === 'Seasonal' ? 'bg-[#4ade80]' : 'bg-red-500';
+            const colorClass = signal.type === 'Seasonal' ? 'bg-google-green' : 'bg-google-red';
             return signal.geo_points.map((pt, pIdx) => (
               <AdvancedMarker key={`pulse-${idx}-${pIdx}`} position={pt}>
                 <div className={`w-4 h-4 ${colorClass} rounded-full animate-ping opacity-75`}></div>
-                <div className={`w-4 h-4 ${colorClass} rounded-full absolute top-0 left-0`}></div>
+                <div className={`w-4 h-4 ${colorClass} rounded-full absolute top-0 left-0 border border-white`}></div>
               </AdvancedMarker>
             ))
           }

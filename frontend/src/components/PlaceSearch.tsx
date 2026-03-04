@@ -34,14 +34,14 @@ export const PlaceSearch: React.FC<PlaceSearchProps> = ({ onPlaceSelect }) => {
   }, [placeAutocomplete, onPlaceSelect]);
 
   return (
-    <div className="relative w-full max-w-md">
-      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <Search className="h-5 w-5 text-gray-400" />
+    <div className="relative w-full max-w-2xl mx-auto drop-shadow-sm">
+      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+        <Search className="h-5 w-5 text-google-gray-800" />
       </div>
       <input
         ref={inputRef}
         type="text"
-        className="block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-lg leading-5 bg-[#1A1D24] text-gray-300 placeholder-gray-500 focus:outline-none focus:bg-[#1A1D24] focus:border-white sm:text-sm transition-colors"
+        className="block w-full pl-12 pr-4 py-3 border border-transparent rounded-full leading-5 bg-white text-google-gray-900 placeholder-google-gray-800 hover:shadow-md focus:shadow-md focus:outline-none sm:text-base transition-shadow"
         placeholder="Search for a store (e.g. Home Depot, Chaska)..."
       />
     </div>

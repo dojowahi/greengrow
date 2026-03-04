@@ -75,13 +75,14 @@ def get_location_context_endpoint(store: Store):
     print(f"Fetching Context: {store.name}")
     try:
          # Import here or better at top if exposed
-         from .services.intelligence import get_location_metrics
-         return get_location_metrics(store.lat, store.lng)
+         from .services.datacommons import get_location_metrics
+         from .services.weather import get_weather_forecast
+         metrics = get_location_metrics(store.lat, store.lng)
+         weather = get_weather_forecast(store.lat, store.lng)
+         return {**metrics, **weather}
     except Exception as e:
          print(f"Context error: {e}")
-         # Return empty context on error gracefully? or 500
-         # Return empty to avoid breaking UI?
-         return {}
+         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/api/trigger_extraction")
 def trigger_extraction(store: Store):

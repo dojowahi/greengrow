@@ -111,9 +111,9 @@ export const TableView: React.FC<TableViewProps> = ({ store, data, locationConte
               <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
               Location Context (Census Data)
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-4 mb-4">
               {Object.entries(locationContext).map(([k, v]) => {
-                if (k === 'dcid') return null;
+                if (k === 'dcid' || k === 'current_temperature' || k === 'current_condition' || k === 'forecast_summary') return null;
 
                 let label = k.replace(/_/g, ' ');
                 if (k === 'Count_Person') label = 'Population';
@@ -134,6 +134,30 @@ export const TableView: React.FC<TableViewProps> = ({ store, data, locationConte
                 );
               })}
             </div>
+
+            {/* Weather Context */}
+            {locationContext.current_temperature && (
+              <>
+                <div className="text-[10px] text-gray-500 uppercase tracking-widest font-semibold mb-3 flex items-center gap-2 pt-4 border-t border-gray-700/50">
+                  <div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>
+                  Weather Context
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-[10px] text-gray-400 mb-1">Current</div>
+                    <div className="text-lg font-medium text-white tracking-tight">
+                      {locationContext.current_temperature} · {locationContext.current_condition}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] text-gray-400 mb-1">Forecast</div>
+                    <div className="text-xs font-medium text-gray-300 tracking-tight leading-relaxed">
+                      {locationContext.forecast_summary}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         )}
 
@@ -212,7 +236,7 @@ export const TableView: React.FC<TableViewProps> = ({ store, data, locationConte
 
         {!data || !data.signals || data.signals.length === 0 ? (
           <div className="text-center py-10 text-gray-500 italic">
-            No active signals detected in the 15km radius.
+            No active signals detected in the 5 mile radius.
           </div>
         ) : (
           <div className="space-y-4">

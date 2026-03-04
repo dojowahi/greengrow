@@ -1,5 +1,6 @@
 from .earth_engine import analyze_seasonal_gee, analyze_growth_gee, analyze_history, start_async_extraction_job
 from .datacommons import get_location_metrics
+from .weather import get_weather_forecast
 from google import genai
 from google.genai import types
 import os
@@ -21,8 +22,8 @@ Current Intelligence:
 - Metric: {metric}
 - Insight: {market_signal}
 {context_str}
-Based on this, suggest a concise (max 10 words) and high-impact stocking action for the store manager.
-Focus on specific product categories relevant to the signal.
+Based on this intelligence and the location/weather context, suggest a concise (max 10 words) and high-impact stocking action for the store manager.
+Focus on specific product categories relevant to the signal AND the current/upcoming weather if applicable.
 Output ONLY the stocking action text."""
 
         response = client.models.generate_content(
@@ -44,9 +45,10 @@ def analyze_seasonal(store_id: str, lat: float, lng: float, store_name: str = "S
     
     # 2. Get Location Context
     metrics = get_location_metrics(lat, lng)
+    weather = get_weather_forecast(lat, lng)
     
     # 3. Combine
-    gee_data["location_context"] = metrics
+    gee_data["location_context"] = {**metrics, **weather}
     return gee_data
 
 def analyze_growth(store_id: str, lat: float, lng: float, store_name: str = "Store"):
@@ -55,9 +57,10 @@ def analyze_growth(store_id: str, lat: float, lng: float, store_name: str = "Sto
     
     # 2. Get Location Context
     metrics = get_location_metrics(lat, lng)
+    weather = get_weather_forecast(lat, lng)
     
     # 3. Combine
-    gee_data["location_context"] = metrics
+    gee_data["location_context"] = {**metrics, **weather}
     return gee_data
 
 # Proxy function for history

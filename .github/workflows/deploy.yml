@@ -20,6 +20,21 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Test Earth Engine Authentication
+        env:
+          GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+        run: |
+          pip install earthengine-api google-auth
+          python -c "import ee; ee.Initialize(project='${GCP_PROJECT}'); print('Earth Engine authentication successful!')"
+
+      - name: Prepare Frontend Env File
+        run: echo "VITE_GOOGLE_MAPS_API_KEY=${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}" > frontend/.env
+
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy greengrow \

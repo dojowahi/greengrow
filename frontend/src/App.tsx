@@ -5,7 +5,8 @@ import { TableView } from './components/Table';
 import { PlaceSearch } from './components/PlaceSearch';
 import { analyzeSeasonal, analyzeGrowth, analyzeHistory, fetchLocationContext } from './utils/api';
 import type { Store, SignalResponse, LocationContext, Signal } from './utils/api';
-import { RefreshCw } from 'lucide-react';
+import { RefreshCw, HelpCircle } from 'lucide-react';
+import { AboutModal } from './components/AboutModal';
 
 function App() {
   const [stores, setStores] = useState<Store[]>([]);
@@ -13,6 +14,7 @@ function App() {
   const [data, setData] = useState<SignalResponse>({ signals: [], history: [] }); // Initialize empty
   const [locationContext, setLocationContext] = useState<LocationContext | null>(null);
   const [loadingState, setLoadingState] = useState({ seasonal: false, growth: false, history: false });
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   // Removed useEffect for initial fetch - app starts empty now.
 
@@ -176,6 +178,13 @@ function App() {
               </button>
             )}
             <button
+              onClick={() => setIsAboutOpen(true)}
+              className="p-2 text-google-gray-800 hover:bg-google-gray-50 rounded-full transition-colors border border-transparent"
+              title="About GreenGrowth"
+            >
+              <HelpCircle className="w-5 h-5" />
+            </button>
+            <button
               onClick={handleExport}
               className="px-4 py-2 bg-google-blue text-white hover:bg-blue-600 transition-colors rounded-full font-medium shadow-sm shadow-google-blue/20"
             >
@@ -210,6 +219,8 @@ function App() {
           </div>
         </main>
       </div>
+
+      <AboutModal isOpen={isAboutOpen} onClose={() => setIsAboutOpen(false)} />
     </APIProvider>
   );
 }

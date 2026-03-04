@@ -30,7 +30,7 @@ jobs:
           GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
         run: |
           pip install earthengine-api google-auth
-          python -c "import ee; ee.Initialize(project='${GCP_PROJECT}'); print('Earth Engine authentication successful!')"
+          python -c "import ee; import google.auth; credentials, project = google.auth.default(scopes=['https://www.googleapis.com/auth/earthengine']); ee.Initialize(credentials=credentials, project='${GCP_PROJECT}'); print('Earth Engine authentication successful!')"
 
       - name: Prepare Frontend Env File
         run: echo "VITE_GOOGLE_MAPS_API_KEY=${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}" > frontend/.env

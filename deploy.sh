@@ -23,6 +23,11 @@ fi
 
 echo "Using Project ID: $PROJECT_ID"
 
+# Extract DATA_COMMONS_API_KEY from backend/.env
+if [ -f "backend/.env" ]; then
+    export $(grep -v '^#' backend/.env | xargs)
+fi
+
 # Deploy
 # Note: Using --source . triggers a Cloud Build which uses the Dockerfile
 gcloud run deploy "$SERVICE_NAME" \
@@ -30,7 +35,7 @@ gcloud run deploy "$SERVICE_NAME" \
   --region "$REGION" \
   --service-account="$SERVICE_ACCOUNT" \
   --impersonate-service-account="$SERVICE_ACCOUNT" \
-  --set-env-vars="GCP_PROJECT=$PROJECT_ID" \
+  --set-env-vars="GCP_PROJECT=$PROJECT_ID,DATA_COMMONS_API_KEY=$DATA_COMMONS_API_KEY" \
   --allow-unauthenticated
 
 echo "Deployment complete! Your service should be available at the URL above."

@@ -179,10 +179,11 @@ function App() {
             )}
             <button
               onClick={() => setIsAboutOpen(true)}
-              className="p-2 text-google-gray-800 hover:bg-google-gray-50 rounded-full transition-colors border border-transparent"
+              className="px-4 py-2 flex items-center gap-2 border border-google-gray-200 text-google-gray-800 hover:bg-google-gray-50 transition-colors rounded-full font-medium"
               title="About GreenGrowth"
             >
-              <HelpCircle className="w-5 h-5" />
+              <HelpCircle className="w-4 h-4" />
+              About
             </button>
             <button
               onClick={handleExport}
